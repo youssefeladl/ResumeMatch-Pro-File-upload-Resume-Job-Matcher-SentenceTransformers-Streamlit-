@@ -8,7 +8,7 @@ import numpy as np
 import streamlit as st
 from sentence_transformers import SentenceTransformer
 st.set_page_config(page_title="Resume Matcher", page_icon="🧠", layout="wide")
-MODEL_PATH = r"D:\materials\AI track\materials\DEEP LEARNING\NLP\resume(cv)\content\my_sentence_model_final"
+MODEL_PATH = r"D:\materials\AI track\materials\DEEP LEARNING\NLP\resume(cv)\ResumeMatch-Pro-File-upload-Resume-Job-Matcher-SentenceTransformers-Streamlit-\FIne_tunning_my_sentence_model"
 
 try:
     import pdfplumber
