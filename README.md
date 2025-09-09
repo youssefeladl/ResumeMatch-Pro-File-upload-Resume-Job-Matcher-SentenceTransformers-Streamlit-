@@ -85,9 +85,3 @@ Shows:
 > Use both for a fuller picture, or combine them into a single final score (see below).
 
 ---
-
-## Model Setup (No CLI)
-
-You need a **local folder** that contains your **SentenceTransformers** model.  
-Recommended structure inside that folder (created automatically when you `model.save(...)` during training in Python):
-
