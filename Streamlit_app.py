@@ -511,7 +511,7 @@ if analyze:
                 for role, cov, m, tot in top:
                     st.write(f"**{role}** — Coverage: {cov*100:.1f}%  ({m}/{tot})")
 
-    with st.expander("Debug: First 1200 chars of extracted resume"):
+    with st.expander("Debug: First 3000 chars of extracted resume"):
         st.code(rt[:1200] + ("…" if len(rt) > 1200 else ""))
 
 else:
