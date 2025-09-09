@@ -7,15 +7,10 @@ import numpy as np
 import streamlit as st
 from sentence_transformers import SentenceTransformer
 
-# --- Streamlit page config MUST be first ---
 st.set_page_config(page_title="Resume Matcher", page_icon="🧠", layout="wide")
-
-# ===================== Model configuration =====================
-# Leave MODEL_PATH empty on Streamlit Cloud. Use it only for local runs.
 MODEL_PATH = r"D:\materials\AI track\materials\DEEP LEARNING\NLP\resume(cv)\ResumeMatch-Pro-File-upload-Resume-Job-Matcher-SentenceTransformers-Streamlit-\FIne_tunning_my_sentence_model"  # e.g., r"D:\models\my_sentence_model_final" for local runs
 HF_MODEL_ID = "youssefeladl/my-sentence-model"  # Your Hugging Face model id
 
-# ===================== Optional Readers =====================
 try:
     import pdfplumber
 except Exception:
@@ -281,7 +276,6 @@ skill_aliases: Dict[str, str] = {
     "ga": "google analytics"
 }
 
-# لو عايز توسّع مجموعة المهارات الأساسية (زي كودك الحالي):
 BASE_SKILLS = set({s for lst in job_skills.values() for s in lst})
 cert_keywords = [
     "certified", "certification", "aws", "microsoft", "pmp", "oracle",
@@ -418,7 +412,7 @@ def rank_roles_by_overlap(resume_skills: List[str]) -> List[Tuple[str, float, in
     return ranking
 
 # ===================== UI =====================
-st.title("🧠 Resume ↔ Job Match (Fine-tuned)")
+st.title("🧠 Resume ↔ Job Match")
 st.caption("Upload a resume file and paste a job description to get a match score and skills breakdown.")
 
 with st.sidebar:
