@@ -1,4 +1,3 @@
-
 import io
 import os
 import re
@@ -7,9 +6,16 @@ from typing import List, Tuple, Dict
 import numpy as np
 import streamlit as st
 from sentence_transformers import SentenceTransformer
-st.set_page_config(page_title="Resume Matcher", page_icon="🧠", layout="wide")
-MODEL_PATH = r"D:\materials\AI track\materials\DEEP LEARNING\NLP\resume(cv)\ResumeMatch-Pro-File-upload-Resume-Job-Matcher-SentenceTransformers-Streamlit-\FIne_tunning_my_sentence_model"
 
+# --- Streamlit page config MUST be first ---
+st.set_page_config(page_title="Resume Matcher", page_icon="🧠", layout="wide")
+
+# ===================== Model configuration =====================
+# Leave MODEL_PATH empty on Streamlit Cloud. Use it only for local runs.
+MODEL_PATH = r"D:\materials\AI track\materials\DEEP LEARNING\NLP\resume(cv)\ResumeMatch-Pro-File-upload-Resume-Job-Matcher-SentenceTransformers-Streamlit-\FIne_tunning_my_sentence_model"  # e.g., r"D:\models\my_sentence_model_final" for local runs
+HF_MODEL_ID = "youssefeladl/my-sentence-model"  # Your Hugging Face model id
+
+# ===================== Optional Readers =====================
 try:
     import pdfplumber
 except Exception:
@@ -20,8 +26,8 @@ try:
 except Exception:
     docx = None
 
+# ===================== Role → Skills Dictionary =====================
 job_skills: Dict[str, List[str]] = {
-
     "Django Developer": [
         "python", "django", "flask", "fastapi", "rest", "rest api", "drf",
         "web development", "html", "css", "javascript", "bootstrap",
@@ -131,22 +137,37 @@ project_keywords = [
     "deployment", "prototype", "algorithm", "solution", "tool"
 ]
 
+# Base skill set for raw scan (union of all role skills)
 BASE_SKILLS = set({s for lst in job_skills.values() for s in lst})
+
+# ===================== Model Loading (local or HF) =====================
 @st.cache_resource(show_spinner=False)
 def load_model():
-    try:
-        return SentenceTransformer(MODEL_PATH)
-    except Exception:
-        # Fallback: build ST from HF folder if needed
-        from sentence_transformers import models as st_models
-        tx = os.path.join(MODEL_PATH, "0_Transformer")
-        bert = st_models.Transformer(tx if os.path.isdir(tx) else MODEL_PATH)
-        pooling = st_models.Pooling(bert.get_word_embedding_dimension())
-        normalize = st_models.Normalize()
-        return SentenceTransformer(modules=[bert, pooling, normalize])
+    # A) Local folder (for local runs only)
+    if MODEL_PATH and os.path.isdir(MODEL_PATH):
+        try:
+            return SentenceTransformer(MODEL_PATH)
+        except Exception:
+            from sentence_transformers import models as st_models
+            tx = os.path.join(MODEL_PATH, "0_Transformer")
+            bert = st_models.Transformer(tx if os.path.isdir(tx) else MODEL_PATH)
+            pooling = st_models.Pooling(bert.get_word_embedding_dimension())
+            normalize = st_models.Normalize()
+            return SentenceTransformer(modules=[bert, pooling, normalize])
+
+    # B) No local folder => load from Hugging Face Hub
+    repo_id = (HF_MODEL_ID or "").strip()
+    if not repo_id:
+        st.error("No local model folder found and no HF model id provided.")
+        st.stop()
+
+    # If the model is private, set HF_TOKEN in Streamlit Cloud Secrets
+    hf_token = os.environ.get("HF_TOKEN")
+    return SentenceTransformer(repo_id, token=hf_token) if hf_token else SentenceTransformer(repo_id)
 
 model = load_model()
 
+# ===================== Utilities =====================
 def normalize_text(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
@@ -164,7 +185,7 @@ def read_txt(file_bytes: bytes) -> str:
 
 def read_pdf(file) -> str:
     if pdfplumber is None:
-        st.warning("pdfplumber not installed. Run: pip install pdfplumber")
+        st.warning("pdfplumber not installed.")
         return ""
     text = []
     with pdfplumber.open(file) as pdf:
@@ -174,7 +195,7 @@ def read_pdf(file) -> str:
 
 def read_docx(file_bytes: bytes) -> str:
     if docx is None:
-        st.warning("python-docx not installed. Run: pip install python-docx")
+        st.warning("python-docx not installed.")
         return ""
     bio = io.BytesIO(file_bytes)
     document = docx.Document(bio)
@@ -235,13 +256,15 @@ def rank_roles_by_overlap(resume_skills: List[str]) -> List[Tuple[str, float, in
     ranking.sort(key=lambda x: x[1], reverse=True)
     return ranking
 
+# ===================== UI =====================
 st.title("🧠 Resume ↔ Job Match (Fine-tuned)")
 st.caption("Upload a resume file and paste a job description to get a match score and skills breakdown.")
 
 with st.sidebar:
     st.subheader("Settings")
-    st.write("Model Path:")
-    st.code(MODEL_PATH)
+    st.write("Model source:")
+    st.write("Local folder exists:", bool(MODEL_PATH and os.path.isdir(MODEL_PATH)))
+    st.code(f"HF_MODEL_ID = {HF_MODEL_ID}")
     extra_skills_str = st.text_area("Extra skills (comma-separated)", placeholder="e.g., Supabase, Flutter, FastAPI, Power BI")
     selected_role = st.selectbox("Target role (optional)", ["(auto-detect top roles)"] + list(job_skills.keys()))
 
