@@ -28,100 +28,261 @@ except Exception:
 
 # ===================== Role → Skills Dictionary =====================
 job_skills: Dict[str, List[str]] = {
-    "Django Developer": [
-        "python", "django", "flask", "fastapi", "rest", "rest api", "drf",
-        "web development", "html", "css", "javascript", "bootstrap",
-        "mysql", "postgresql", "sqlite", "mongodb",
-        "orm", "django orm", "celery", "redis", "docker", "nginx", "gunicorn",
-        "unit testing", "pytest", "github", "git"
+    # ===================== Software & Data =====================
+    "Software Engineer": [
+        "python", "java", "c#", "c++", "go", "javascript", "typescript",
+        "object oriented programming", "design patterns", "data structures",
+        "algorithms", "rest api", "graphql", "microservices",
+        "sql", "nosql", "git", "unit testing", "integration testing",
+        "system design", "linux", "docker", "kubernetes", "ci/cd"
     ],
-    "Java Developer": [
-        "java", "spring", "spring boot", "hibernate", "maven", "gradle",
-        "jsp", "servlets", "junit", "apache tomcat",
-        "sql", "oracle", "mysql", "postgresql",
-        "microservices", "kafka", "rabbitmq", "docker", "kubernetes",
-        "rest api", "oop", "design patterns"
+    "Backend Developer": [
+        "python", "django", "flask", "fastapi", "nodejs", "express",
+        "java", "spring boot", "php", "laravel", "ruby", "rails",
+        "rest api", "graphql", "mysql", "postgresql", "mongodb",
+        "redis", "celery", "docker", "kubernetes", "testing"
     ],
-    "DevOps Engineer": [
-        "devops", "linux", "bash", "shell scripting", "docker", "kubernetes",
-        "aws", "azure", "gcp", "terraform", "ansible", "jenkins",
-        "git", "github actions", "ci/cd", "prometheus", "grafana",
-        "nginx", "apache", "load balancing", "scalability", "monitoring"
+    "Frontend Developer": [
+        "html", "css", "javascript", "typescript", "react", "redux",
+        "next.js", "vue", "nuxt", "angular", "webpack",
+        "responsive design", "ui/ux", "accessibility", "testing"
     ],
     "Full Stack Developer": [
-        "html", "css", "javascript", "typescript", "react", "angular", "vue",
-        "nodejs", "express", "django", "flask", "php", "laravel",
-        "java", "spring boot", "c#", ".net", "mysql", "postgresql", "mongodb",
-        "graphql", "rest api", "git", "docker"
+        "react", "angular", "vue", "next.js", "nodejs", "express",
+        "python", "django", "flask", "php", "laravel",
+        "mysql", "postgresql", "mongodb", "graphql", "rest api",
+        "git", "docker", "ci/cd", "testing"
+    ],
+    "DevOps Engineer": [
+        "linux", "bash", "docker", "kubernetes", "helm",
+        "jenkins", "github actions", "gitlab ci", "ci/cd",
+        "terraform", "ansible", "aws", "azure", "gcp",
+        "prometheus", "grafana", "nginx", "monitoring", "sre"
+    ],
+    "Cloud Engineer": [
+        "aws", "azure", "gcp", "ec2", "s3", "iam", "vpc",
+        "cloud networking", "load balancer", "terraform",
+        "cloud formation", "kubectl", "docker", "linux", "monitoring"
+    ],
+    "Cybersecurity Analyst": [
+        "network security", "siem", "soc", "ids/ips", "firewall",
+        "incident response", "vulnerability assessment", "threat hunting",
+        "wireshark", "nmap", "kali linux", "iso 27001", "gdpr"
+    ],
+    "Data Scientist": [
+        "python", "r", "sql", "pandas", "numpy", "scikit-learn",
+        "statistics", "probability", "machine learning", "deep learning",
+        "natural language processing", "computer vision",
+        "matplotlib", "seaborn", "pytorch", "tensorflow", "mlflow"
+    ],
+    "Data Analyst": [
+        "excel", "sql", "tableau", "power bi", "python",
+        "pandas", "statistics", "data cleaning", "etl",
+        "dashboard", "a/b testing", "reporting"
+    ],
+    "Machine Learning Engineer": [
+        "python", "pytorch", "tensorflow", "scikit-learn",
+        "feature engineering", "model serving", "fastapi",
+        "docker", "kubernetes", "mlops", "airflow", "mlflow",
+        "monitoring", "experiment tracking"
+    ],
+    "QA / Test Engineer": [
+        "manual testing", "automation testing", "selenium", "cypress",
+        "pytest", "junit", "api testing", "postman",
+        "test cases", "bug tracking", "jira", "performance testing"
+    ],
+    "Android Developer": [
+        "kotlin", "java", "android sdk", "jetpack", "room",
+        "retrofit", "material design", "firebase", "rest api"
     ],
     "iOS Developer": [
-        "swift", "objective-c", "xcode", "cocoa touch", "ios sdk",
-        "ui kit", "core data", "core animation", "firebase",
-        "rest api", "json", "git"
-    ],
-    "Flutter Developer": [
-        "flutter", "dart", "android", "ios", "firebase", "bloc", "riverpod",
-        "rest api", "json", "sqlite", "push notifications", "ui/ux"
+        "swift", "objective-c", "xcode", "cocoa touch",
+        "uikit", "swiftui", "core data", "firebase", "rest api"
     ],
     "Database Administrator": [
         "sql", "mysql", "postgresql", "oracle", "sql server", "db2",
-        "mongodb", "cassandra", "nosql", "pl/sql", "database design",
-        "indexing", "query optimization", "backup", "replication",
-        "normalization", "er diagrams"
+        "backup", "replication", "indexing", "query optimization",
+        "normalization", "er diagrams", "high availability"
     ],
-    "Node.js Developer": [
-        "nodejs", "express", "javascript", "typescript", "npm", "yarn",
-        "mongodb", "mysql", "postgresql", "graphql", "rest api",
-        "jwt", "oauth", "docker", "microservices"
+
+    # ===================== Finance & Business =====================
+    "Financial Analyst": [
+        "excel", "financial modeling", "valuation", "dcf",
+        "budgeting", "forecasting", "kpis", "variance analysis",
+        "accounting principles", "power bi", "tableau", "sql"
     ],
-    "Software Engineer": [
-        "python", "java", "c++", "c", "git", "github", "algorithms",
-        "data structures", "oop", "design patterns", "testing",
-        "unit testing", "system design", "sql", "nosql"
+    "Accountant": [
+        "general ledger", "ap", "ar", "reconciliation",
+        "ifrs", "gaap", "tax", "vat", "payroll",
+        "excel", "sap", "oracle erp", "quickbooks"
     ],
-    "Wordpress Developer": [
-        "wordpress", "php", "html", "css", "javascript", "woocommerce",
-        "themes", "plugins", "seo", "mysql", "elementor"
+    "Auditor": [
+        "audit planning", "internal controls", "risk assessment",
+        "ifrs", "gaap", "sampling", "substantive testing",
+        "workpapers", "reporting"
     ],
-    "PHP Developer": [
-        "php", "laravel", "symfony", "codeigniter", "cakephp",
-        "mysql", "postgresql", "javascript", "jquery", "ajax",
-        "html", "css", "git"
-    ],
-    "Backend Developer": [
-        "nodejs", "express", "django", "flask", "java", "spring boot",
-        "php", "laravel", "ruby", "rails", "mysql", "postgresql", "mongodb",
-        "graphql", "rest api", "docker"
-    ],
-    "Network Administrator": [
-        "networking", "router", "switch", "firewall", "dns", "dhcp",
-        "vpn", "tcp/ip", "lan", "wan", "cisco", "load balancing",
-        "troubleshooting", "wireshark"
-    ],
-    "Blockchain Developer": [
-        "blockchain", "ethereum", "solidity", "smart contracts",
-        "web3", "defi", "nft", "bitcoin", "cryptography",
-        "consensus", "hyperledger", "rust", "go", "truffle", "ganache"
-    ],
-    "Data Scientist": [
-        "python","sql", "pandas", "numpy", "scikit-learn",
-        "tensorflow", "keras", "statistics", "probability",
-        "machine learning", "deep learning", "nlp", "computer vision",
-        "matplotlib", "seaborn","nlp","opencv", "cnn",
-        "transformers"
+    "Investment Analyst": [
+        "equity research", "financial modeling", "valuation",
+        "portfolio analysis", "bloomberg", "excel", "powerpoint"
     ],
     "Business Analyst": [
-        "excel", "sql", "tableau", "powerbi", "python", "r",
-        "business analysis", "requirement gathering", "uml", "data modeling",
-        "statistics", "communication", "project management", "agile", "jira"
+        "requirements gathering", "process mapping", "sql",
+        "excel", "stakeholder management", "uml",
+        "agile", "jira", "documentation", "kpis"
     ],
-    "Testing / QA Engineer": [
-        "manual testing", "automation testing", "selenium", "junit",
-        "pytest", "cypress", "api testing", "postman",
-        "test cases", "bug tracking", "jira", "agile", "unit testing"
+    "Project Manager (IT)": [
+        "project management", "agile", "scrum", "kanban",
+        "planning", "risk management", "budgeting", "stakeholders",
+        "jira", "confluence", "reporting"
+    ],
+    "Product Manager": [
+        "product roadmap", "requirements", "user research",
+        "wireframing", "analytics", "kpis", "go-to-market",
+        "agile", "scrum", "backlog"
+    ],
+    "Procurement Specialist": [
+        "procurement", "vendor management", "rfq", "rfi", "tenders",
+        "negotiation", "contracts", "sap", "oracle erp"
+    ],
+    "Supply Chain Analyst": [
+        "demand planning", "forecasting", "inventory management",
+        "logistics", "excel", "power bi", "sql", "sap"
+    ],
+    "Operations Manager": [
+        "process improvement", "kpis", "sop", "leadership",
+        "capacity planning", "resource allocation", "reporting"
+    ],
+    "Sales Executive": [
+        "lead generation", "crm", "negotiation", "pipeline management",
+        "cold calling", "presentation", "closing", "reporting"
+    ],
+    "Digital Marketing Specialist": [
+        "seo", "sem", "content marketing", "social media",
+        "google ads", "facebook ads", "ppc", "email marketing",
+        "google analytics", "tag manager"
+    ],
+    "HR Generalist": [
+        "recruitment", "onboarding", "employee relations",
+        "payroll", "performance management", "hr policies",
+        "labor law", "training", "hris"
+    ],
+    "Recruiter": [
+        "sourcing", "screening", "interviewing", " ats ",
+        "stakeholder management", "offer negotiation", "reporting"
+    ],
+    "Customer Support Specialist": [
+        "customer service", "ticketing", "sla", "crm",
+        "communication", "troubleshooting", "knowledge base"
+    ],
+
+    # ===================== Engineering (Non-Software) =====================
+    "Civil Engineer": [
+        "autocad", "etabs", "sap2000", "staad", "revit",
+        "structural design", "quantity surveying", "shop drawings",
+        "site supervision", "project management", "health and safety", "qaqc"
+    ],
+    "Mechanical Engineer": [
+        "solidworks", "autocad", "ansys", "hvac", "piping",
+        "manufacturing", "maintenance", "thermodynamics",
+        "root cause analysis", "preventive maintenance"
+    ],
+    "Electrical Engineer": [
+        "autocad", "revit", "power systems", "mv/lv",
+        "load calculation", "protection", "plc", "scada",
+        "single line diagram", "lighting design"
+    ],
+    "Mechatronics Engineer": [
+        "embedded systems", "arduino", "stm32", "c", "c++",
+        "plc", "robotics", "sensors", "actuators", "control"
+    ],
+    "Industrial Engineer": [
+        "lean manufacturing", "six sigma", "process improvement",
+        "time study", "value stream mapping", "kpis", "sap"
+    ],
+    "Quality Engineer": [
+        "qaqc", "iso 9001", "spc", "root cause analysis",
+        "8d", "fmea", "ppap", "msa", "corrective actions"
+    ],
+    "Chemical Engineer": [
+        "process design", "pfd", "p&id", "hysys",
+        "safety", "quality control", "unit operations"
+    ],
+
+    # ===================== Healthcare & Pharma =====================
+    "Pharmacist": [
+        "dispensing", "drug interactions", "dosage", "counseling",
+        "inventory management", "pharmacovigilance", "prescriptions"
+    ],
+    "Clinical Pharmacist": [
+        "medication therapy management", "clinical guidelines",
+        "drug monitoring", "patient counseling", "ward rounds"
+    ],
+    "Medical Representative": [
+        "product knowledge", "territory management", "kols",
+        "sales", "presentations", "reporting", "crm"
+    ],
+    "Biomedical Engineer": [
+        "medical devices", "maintenance", "calibration",
+        "installation", "troubleshooting", "documentation"
+    ],
+    "Lab Technician": [
+        "sample collection", "microbiology", "hematology",
+        "biochemistry", "quality control", "lab safety", "lims"
+    ],
+
+    # ===================== Creative & Content =====================
+    "UX/UI Designer": [
+        "user research", "wireframes", "prototyping",
+        "figma", "sketch", "adobe xd", "usability testing", "design systems"
+    ],
+    "Graphic Designer": [
+        "photoshop", "illustrator", "indesign",
+        "branding", "layout", "typography", "social media design"
+    ],
+    "Content Writer": [
+        "copywriting", "seo writing", "editing", "proofreading",
+        "content strategy", "research", "cms", "wordpress"
+    ],
+    "Social Media Manager": [
+        "content calendar", "community management", "ads manager",
+        "analytics", "engagement", "branding", "reporting"
+    ],
+
+    # ===================== Education & Admin =====================
+    "Teacher": [
+        "lesson planning", "classroom management", "assessment",
+        "curriculum design", "communication", "student engagement"
+    ],
+    "Teaching Assistant": [
+        "class support", "grading", "lesson assistance",
+        "student supervision", "materials preparation"
+    ],
+    "Data Entry Specialist": [
+        "typing", "excel", "accuracy", "attention to detail",
+        "data cleaning", "erp", "reporting"
     ]
 }
+skill_aliases: Dict[str, str] = {
+    "ms sql": "sql server",
+    "mssql": "sql server",
+    "postgres": "postgresql",
+    "tf": "tensorflow",
+    "sklearn": "scikit-learn",
+    "js": "javascript",
+    "ts": "typescript",
+    "node": "nodejs",
+    "ci cd": "ci/cd",
+    "ci-cd": "ci/cd",
+    "nlp": "natural language processing",
+    "cv": "computer vision",
+    "ml": "machine learning",
+    "dl": "deep learning",
+    "pm": "project management",
+    "ga": "google analytics"
+}
 
+# لو عايز توسّع مجموعة المهارات الأساسية (زي كودك الحالي):
+BASE_SKILLS = set({s for lst in job_skills.values() for s in lst})
 cert_keywords = [
     "certified", "certification", "aws", "microsoft", "pmp", "oracle",
     "cisco", "google cloud", "azure", "coursera", "udemy", "ibm",
